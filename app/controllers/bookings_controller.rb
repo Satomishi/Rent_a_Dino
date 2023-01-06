@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.dinosaur = Dinosaur.find(params[:dinosaur_id])
     @booking.user = current_user
-    @booking.booking_price = @booking.duration * @booking.dinosaur.price_per_day
+    @booking.booking_price = @booking.duration * @booking.dinosaur.price_per_day.fdiv(100)
     if @booking.save!
       redirect_to my_bookings_path(@booking)
     else
